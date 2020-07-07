@@ -16,7 +16,6 @@
 package com.nus.cool.core.util.converter;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1

@@ -75,12 +75,12 @@ public class RangeFieldWS implements FieldWS {
 
   @Override
   public void put(String[] tuple) throws IOException {
-      if (this.fieldType == FieldType.ActionTime) {
-          DayIntConverter converter = new DayIntConverter();
-          this.buffer.writeInt(converter.toInt(tuple[this.i]));
-      } else {
-          this.buffer.writeInt(Integer.parseInt(tuple[i]));
-      }
+    if (this.fieldType == FieldType.ActionTime) {
+      DayIntConverter converter = new DayIntConverter();
+      this.buffer.writeInt(converter.toInt(tuple[this.i]));
+    } else {
+      this.buffer.writeInt(Integer.parseInt(tuple[i]));
+    }
   }
 
   @Override
@@ -93,9 +93,9 @@ public class RangeFieldWS implements FieldWS {
     // TODO: Bloated code
     try (DataInputBuffer input = new DataInputBuffer()) {
       input.reset(this.buffer);
-        for (int i = 0; i < value.length; i++) {
-            value[i] = input.readInt();
-        }
+      for (int i = 0; i < value.length; i++) {
+        value[i] = input.readInt();
+      }
     }
 
     key[0] = ArrayUtil.min(value);

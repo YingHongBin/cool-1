@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- *
  * @author hongbin, zhongle
  * @version 0.1
  * @since 0.1
@@ -57,9 +56,9 @@ public class LocalLoader {
         String line = (String) reader.next();
         String[] tuple = parser.parse(line);
         String curUser = tuple[userKeyIndex];
-          if (lastUser == null) {
-              lastUser = curUser;
-          }
+        if (lastUser == null) {
+          lastUser = curUser;
+        }
         if (!curUser.equals(lastUser)) {
           lastUser = curUser;
           if (tuples >= chunkSize) {
@@ -106,9 +105,9 @@ public class LocalLoader {
   private static void closeCublet(DataOutputStream out) throws IOException {
     int headOffset = offset;
     out.writeInt(IntegerUtil.toNativeByteOrder(chunkOffsets.size()));
-      for (int chunkOff : chunkOffsets) {
-          out.writeInt(IntegerUtil.toNativeByteOrder(chunkOff));
-      }
+    for (int chunkOff : chunkOffsets) {
+      out.writeInt(IntegerUtil.toNativeByteOrder(chunkOff));
+    }
     out.writeInt(IntegerUtil.toNativeByteOrder(headOffset));
     out.flush();
     out.close();

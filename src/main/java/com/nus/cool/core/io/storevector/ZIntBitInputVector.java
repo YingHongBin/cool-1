@@ -19,7 +19,6 @@ import java.nio.ByteBuffer;
 import java.nio.LongBuffer;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
@@ -75,9 +74,9 @@ public class ZIntBitInputVector implements ZIntStore, InputVector {
 
   @Override
   public int get(int index) {
-      if (index >= this.capacity) {
-          throw new IndexOutOfBoundsException();
-      }
+    if (index >= this.capacity) {
+      throw new IndexOutOfBoundsException();
+    }
     int offset = 64 - (1 + index % this.noValPerPack) * this.bitWidth;
     long pack = getPack(index);
     long val = ((pack >>> offset) & this.mask);
@@ -96,9 +95,9 @@ public class ZIntBitInputVector implements ZIntStore, InputVector {
 
   @Override
   public void skipTo(int pos) {
-      if (pos >= this.capacity) {
-          throw new IndexOutOfBoundsException();
-      }
+    if (pos >= this.capacity) {
+      throw new IndexOutOfBoundsException();
+    }
     this.pos = pos;
     this.packOffset = 64 - (pos % this.noValPerPack) * this.bitWidth;
     this.bitPack.position(pos / this.noValPerPack);

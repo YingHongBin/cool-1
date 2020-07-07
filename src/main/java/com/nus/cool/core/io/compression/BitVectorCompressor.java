@@ -65,16 +65,16 @@ public class BitVectorCompressor implements Compressor {
 
   @Override
   public int compress(int[] src, int srcOff, int srcLen, byte[] dest, int destOff, int maxDestLen) {
-      for (int i = srcOff; i < srcOff + srcLen; i++) {
-          this.bitSet.set(src[i]);
-      }
+    for (int i = srcOff; i < srcOff + srcLen; i++) {
+      this.bitSet.set(src[i]);
+    }
     long[] words = this.bitSet.toLongArray();
     ByteBuffer buffer = ByteBuffer.wrap(dest, destOff, maxDestLen);
     buffer.order(ByteOrder.nativeOrder());
     buffer.put((byte) words.length);
-      for (long w : words) {
-          buffer.putLong(w);
-      }
+    for (long w : words) {
+      buffer.putLong(w);
+    }
     return buffer.position();
   }
 }

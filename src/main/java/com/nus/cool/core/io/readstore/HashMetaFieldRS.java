@@ -26,7 +26,6 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
@@ -81,10 +80,10 @@ public class HashMetaFieldRS implements MetaFieldRS {
   public void readFromWithFieldType(ByteBuffer buffer, FieldType fieldType) {
     this.fieldType = fieldType;
     this.fingerVec = InputVectorFactory.readFrom(buffer);
-      if (this.fieldType == FieldType.Action || this.fieldType == FieldType.Segment
-          || this.fieldType == FieldType.UserKey) {
-          this.valueVec = InputVectorFactory.readFrom(buffer);
-      }
+    if (this.fieldType == FieldType.Action || this.fieldType == FieldType.Segment
+        || this.fieldType == FieldType.UserKey) {
+      this.valueVec = InputVectorFactory.readFrom(buffer);
+    }
   }
 
   @Override

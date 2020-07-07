@@ -21,7 +21,6 @@ import java.nio.ByteBuffer;
 import java.nio.ShortBuffer;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
@@ -49,9 +48,9 @@ public class ZInt16Store implements ZIntStore, InputVector {
 
   @Override
   public int find(int key) {
-      if (key > Short.MAX_VALUE || key < 0) {
-          return -1;
-      }
+    if (key > Short.MAX_VALUE || key < 0) {
+      return -1;
+    }
     return ShortBuffers.binarySearchUnsigned(this.buffer, 0, this.buffer.limit(), (short) key);
   }
 

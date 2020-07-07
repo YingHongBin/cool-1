@@ -70,9 +70,9 @@ public class ChunkRS implements Input {
   public void readFrom(ByteBuffer buffer) {
     // Get chunkType
     ChunkType chunkType = ChunkType.fromInteger(buffer.get());
-      if (chunkType != ChunkType.DATA) {
-          throw new IllegalStateException("Expect DataChunk, but reads: " + chunkType);
-      }
+    if (chunkType != ChunkType.DATA) {
+      throw new IllegalStateException("Expect DataChunk, but reads: " + chunkType);
+    }
 
     // Get #records
     this.records = buffer.getInt();
@@ -80,9 +80,9 @@ public class ChunkRS implements Input {
     int fields = buffer.getInt();
     // Get field offsets
     int[] fieldOffsets = new int[fields];
-      for (int i = 0; i < fields; i++) {
-          fieldOffsets[i] = buffer.getInt();
-      }
+    for (int i = 0; i < fields; i++) {
+      fieldOffsets[i] = buffer.getInt();
+    }
 
     this.fields = new FieldRS[fields];
     for (int i = 0; i < fields; i++) {
@@ -95,5 +95,9 @@ public class ChunkRS implements Input {
 
   public FieldRS getField(int i) {
     return this.fields[i];
+  }
+
+  public FieldRS getField(String fieldName) {
+    return getField(this.schema.getFieldID(fieldName));
   }
 }

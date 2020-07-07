@@ -13,15 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.nus.cool.core.io.storevector;
+package com.nus.cool.core.iceberg.query;
 
-import com.nus.cool.core.io.Input;
+import com.nus.cool.core.iceberg.aggregator.AggregatorFactory;
+import java.util.List;
+import lombok.NoArgsConstructor;
 
 /**
- * @author zhongle
+ * @author hongbin
  * @version 0.1
  * @since 0.1
  */
-public interface ZIntStore extends Input {
+@NoArgsConstructor
+public class Aggregation {
 
+  private String fieldName;
+
+  private List<AggregatorFactory.AggregatorType> operators;
+
+  public Aggregation(String fieldName, List<AggregatorFactory.AggregatorType> operators) {
+    this.fieldName = fieldName;
+    this.operators = operators;
+  }
+
+  public String getFieldName() {
+    return fieldName;
+  }
+
+  public List<AggregatorFactory.AggregatorType> getOperators() {
+    return operators;
+  }
 }

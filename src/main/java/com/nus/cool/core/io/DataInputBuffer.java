@@ -18,7 +18,6 @@ package com.nus.cool.core.io;
 import java.io.DataInputStream;
 
 /**
- *
  * @author zhongle, hongbin
  * @version 0.1
  * @since 0.1

@@ -20,7 +20,6 @@ import com.nus.cool.core.schema.FieldType;
 import java.io.IOException;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1

@@ -25,7 +25,8 @@ import java.io.InputStream;
  * @version 0.1
  * @since 0.1
  */
-@SuppressWarnings({"lgtm [java/implicit-cast-in-compound-assignment", "lgtm [java/non-sync-override]"})
+@SuppressWarnings({"lgtm [java/implicit-cast-in-compound-assignment",
+    "lgtm [java/non-sync-override]"})
 public class FastInputStream extends InputStream {
 
   /**

@@ -86,23 +86,23 @@ public class MetaChunkRS implements Input {
     // Get chunk type
     this.buffer = checkNotNull(buffer);
     ChunkType chunkType = ChunkType.fromInteger(this.buffer.get());
-      if (chunkType != ChunkType.META) {
-          throw new IllegalStateException("Expect MetaChunk, but reads: " + chunkType);
-      }
+    if (chunkType != ChunkType.META) {
+      throw new IllegalStateException("Expect MetaChunk, but reads: " + chunkType);
+    }
 
     // Get #fields
     int fields = this.buffer.getInt();
     // Get field offsets
     this.fieldOffsets = new int[fields];
-      for (int i = 0; i < fields; i++) {
-          fieldOffsets[i] = this.buffer.getInt();
-      }
+    for (int i = 0; i < fields; i++) {
+      fieldOffsets[i] = this.buffer.getInt();
+    }
   }
 
   public synchronized MetaFieldRS getMetaField(int i, FieldType type) {
-      if (this.fields.containsKey(i)) {
-          return this.fields.get(i);
-      }
+    if (this.fields.containsKey(i)) {
+      return this.fields.get(i);
+    }
 
     int fieldOffset = this.fieldOffsets[i];
     this.buffer.position(fieldOffset);

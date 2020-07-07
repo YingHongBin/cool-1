@@ -22,7 +22,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- *
  * @author zhongle, hongbin
  * @version 0.1
  * @since 0.1

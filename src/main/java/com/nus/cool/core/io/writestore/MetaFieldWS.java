@@ -19,7 +19,6 @@ import com.nus.cool.core.io.Output;
 import com.nus.cool.core.schema.FieldType;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
