@@ -19,7 +19,6 @@ import java.nio.ByteBuffer;
 import java.util.BitSet;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
@@ -49,9 +48,9 @@ public class BitVectorInputVector implements InputVector {
 
   @Override
   public int get(int index) {
-      if (this.globalIDs.length == 0) {
-          return 0;
-      }
+    if (this.globalIDs.length == 0) {
+      return 0;
+    }
     return this.globalIDs[index];
   }
 
@@ -94,11 +93,11 @@ public class BitVectorInputVector implements InputVector {
     return i & (64 - 1);
   }
 
-  private void fillInGlobalIDs() {
+  private void fillinglobalids() {
     BitSet bs = BitSet.valueOf(this.words);
     this.globalIDs = new int[this.numOfIDs];
-      for (int i = bs.nextSetBit(0), j = 0; i >= 0; i = bs.nextSetBit(i + 1)) {
-          this.globalIDs[j++] = i;
-      }
+    for (int i = bs.nextSetBit(0), j = 0; i >= 0; i = bs.nextSetBit(i + 1)) {
+      this.globalIDs[j++] = i;
+    }
   }
 }

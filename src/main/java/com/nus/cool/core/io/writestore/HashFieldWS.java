@@ -94,11 +94,11 @@ public class HashFieldWS implements FieldWS {
   @Override
   public void put(String[] tuple) throws IOException {
     int gId = this.metaField.find(tuple[i]);
-      if (gId == -1)
-      // The data may be corrupted
-      {
-          throw new IllegalArgumentException("Value not exist in dimension: " + tuple[i]);
-      }
+    if (gId == -1)
+    // The data may be corrupted
+    {
+      throw new IllegalArgumentException("Value not exist in dimension: " + tuple[i]);
+    }
     // Write globalIDs as values for temporary
     this.buffer.writeInt(gId);
     // Set localID as 0 for temporary

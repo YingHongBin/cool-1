@@ -21,7 +21,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.nio.ShortBuffer;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
@@ -47,13 +46,13 @@ public class ShortBuffers {
     while (fromIndex <= toIndex) {
       int mid = (fromIndex + toIndex) >> 1;
       int e = buffer.get(mid) & 0xFFFF;
-        if (ikey > e) {
-            fromIndex = mid + 1;
-        } else if (ikey < e) {
-            toIndex = mid - 1;
-        } else {
-            return mid;
-        }
+      if (ikey > e) {
+        fromIndex = mid + 1;
+      } else if (ikey < e) {
+        toIndex = mid - 1;
+      } else {
+        return mid;
+      }
     }
     return ~fromIndex;
   }

@@ -59,6 +59,7 @@ public class CubletRS implements Input {
   /**
    * BitSet list for query result
    */
+  @Getter
   private List<BitSet> bitSets = Lists.newArrayList();
 
   @Getter
@@ -95,18 +96,18 @@ public class CubletRS implements Input {
       buffer.position(end - Ints.BYTES);
       headOffset = buffer.getInt();
       buffer.position(end);
-        for (; size > 0; size--) {
-            this.bitSets.add(SimpleBitSetCompressor.read(buffer));
-        }
+      for (; size > 0; size--) {
+        this.bitSets.add(SimpleBitSetCompressor.read(buffer));
+      }
     }
 
     // Get #chunk and chunk offsets
     buffer.position(headOffset);
     int chunks = buffer.getInt();
     int[] chunkOffsets = new int[chunks];
-      for (int i = 0; i < chunks; i++) {
-          chunkOffsets[i] = buffer.getInt();
-      }
+    for (int i = 0; i < chunks; i++) {
+      chunkOffsets[i] = buffer.getInt();
+    }
 
     // Read meta chunk
     this.metaChunk = new MetaChunkRS(this.schema);

@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- *
  * @author zhongle, hongbin
  * @version 0.1
  * @since 0.1

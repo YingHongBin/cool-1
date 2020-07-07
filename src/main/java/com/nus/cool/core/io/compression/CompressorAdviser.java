@@ -66,31 +66,31 @@ public class CompressorAdviser {
 
     if (max < 256) {
       // TODO: Optimize this condition for better performance with INT16 and INT32
-        if (bitmapBytes <= byteAlignLength)
-        // If byte size >= bitSet size, bitVector is a better choice
-        {
-            return Codec.BitVector;
-        } else
-        // max < 2^8
-        {
-            return Codec.INT8;
-        }
+      if (bitmapBytes <= byteAlignLength)
+      // If byte size >= bitSet size, bitVector is a better choice
+      {
+        return Codec.BitVector;
+      } else
+      // max < 2^8
+      {
+        return Codec.INT8;
+      }
     } else if (max < 65536)
     // max < 2^16
     {
-        return Codec.INT16;
+      return Codec.INT16;
     } else
     // max < 2^32 (Integer.MAX_VALUE)
     {
-        return Codec.INT32;
+      return Codec.INT32;
     }
   }
 
   // TODO: NEED docs
   private static Codec adviseForValue(Histogram hist) {
-      if (hist.isSorted()) {
-          return Codec.RLE;
-      }
+    if (hist.isSorted()) {
+      return Codec.RLE;
+    }
 
     int max = (int) hist.getMax();
     int bitLength = IntegerUtil.minBits(max);

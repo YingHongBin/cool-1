@@ -45,7 +45,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author hongbin, zhongle
  * @version 0.1
  * @since 0.1
@@ -92,10 +91,10 @@ public class CohortLoader {
             return s.endsWith(".dz");
           }
         });
-          for (File cubletFile : cubletFiles) {
-              map.put(cubletFile.getName(),
-                  new DataOutputStream(new FileOutputStream(cubletFile, true)));
-          }
+        for (File cubletFile : cubletFiles) {
+          map.put(cubletFile.getName(),
+              new DataOutputStream(new FileOutputStream(cubletFile, true)));
+        }
       }
     }
 
@@ -129,9 +128,9 @@ public class CohortLoader {
       if (tag) {
         int end = cublet.getLimit();
         DataOutputStream out = map.get(cublet.getFile());
-          for (BitSet bs : bitSets) {
-              SimpleBitSetCompressor.compress(bs, out);
-          }
+        for (BitSet bs : bitSets) {
+          SimpleBitSetCompressor.compress(bs, out);
+        }
         out.writeInt(IntegerUtil.toNativeByteOrder(end));
         out.writeInt(IntegerUtil.toNativeByteOrder(bitSets.size()));
         out.writeInt(IntegerUtil.toNativeByteOrder(0));

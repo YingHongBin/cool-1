@@ -23,7 +23,6 @@ import net.jpountz.lz4.LZ4Factory;
 import net.jpountz.lz4.LZ4FastDecompressor;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
@@ -93,9 +92,9 @@ public class LZ4InputVector implements InputVector {
       ByteBuffer buffer = ByteBuffer.wrap(raw);
       int values = buffer.getInt();
       this.offsets = new int[values];
-        for (int i = 0; i < values; i++) {
-            this.offsets[i] = buffer.getInt();
-        }
+      for (int i = 0; i < values; i++) {
+        this.offsets[i] = buffer.getInt();
+      }
       this.data = new byte[rawLen - 4 - values * 4];
       buffer.get(this.data);
     }

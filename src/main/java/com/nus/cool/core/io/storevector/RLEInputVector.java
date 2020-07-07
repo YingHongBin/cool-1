@@ -18,7 +18,6 @@ package com.nus.cool.core.io.storevector;
 import java.nio.ByteBuffer;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
@@ -79,12 +78,12 @@ public class RLEInputVector implements InputVector {
       this.curBlk = 0;
       readNextBlock();
     }
-      while (pos >= this.bend && this.curBlk < this.blks) {
-          readNextBlock();
-      }
-      if (pos >= this.bend) {
-          throw new IllegalArgumentException("Too large pos param");
-      }
+    while (pos >= this.bend && this.curBlk < this.blks) {
+      readNextBlock();
+    }
+    if (pos >= this.bend) {
+      throw new IllegalArgumentException("Too large pos param");
+    }
     this.boff = pos;
   }
 

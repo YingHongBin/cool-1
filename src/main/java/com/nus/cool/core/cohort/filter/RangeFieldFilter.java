@@ -96,9 +96,9 @@ public class RangeFieldFilter implements FieldFilter {
   @Override
   public List<String> getValues() {
     List<String> values = Lists.newArrayList();
-      for (int i = 0; i < this.minValues.length; i++) {
-          values.add(this.minValues[i] + "|" + this.maxValues[i]);
-      }
+    for (int i = 0; i < this.minValues.length; i++) {
+      values.add(this.minValues[i] + "|" + this.maxValues[i]);
+    }
     return values;
   }
 }

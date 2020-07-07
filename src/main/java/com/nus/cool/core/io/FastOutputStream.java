@@ -192,9 +192,9 @@ public class FastOutputStream extends OutputStream {
    *                          (minCapacity - Integers.MAX_VALUE)}
    */
   private void ensureCapacity(int minCapacity) {
-      if (minCapacity - this.buffer.length > 0) {
-          grow(minCapacity);
-      }
+    if (minCapacity - this.buffer.length > 0) {
+      grow(minCapacity);
+    }
   }
 
   /**
@@ -206,15 +206,15 @@ public class FastOutputStream extends OutputStream {
   private void grow(int minCapacity) {
     int oldCapacity = this.buffer.length;
     int newCapacity = oldCapacity << 1;
-      if (newCapacity - minCapacity < 0) {
-          newCapacity = minCapacity;
-      }
+    if (newCapacity - minCapacity < 0) {
+      newCapacity = minCapacity;
+    }
     if (newCapacity < 0) {
-        // overflow. TODO: Check whether the following condition is always false
-        if (minCapacity < 0)    // lgtm [java/constant-comparison]
-        {
-            throw new OutOfMemoryError();
-        }
+      // overflow. TODO: Check whether the following condition is always false
+      if (minCapacity < 0)    // lgtm [java/constant-comparison]
+      {
+        throw new OutOfMemoryError();
+      }
       newCapacity = Integer.MAX_VALUE;
     }
     this.buffer = Arrays.copyOf(this.buffer, newCapacity);

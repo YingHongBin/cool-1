@@ -80,9 +80,9 @@ public class CohortAggregation implements Operator {
     this.birthActionGlobalIDs = new int[this.birthActions.length];
     for (int i = 0; i < this.birthActions.length; i++) {
       int id = actionMetaField.find(this.birthActions[i]);
-        if (id < 0) {
-            throw new RuntimeException("Unknown birth action: " + this.birthActions[i]);
-        }
+      if (id < 0) {
+        throw new RuntimeException("Unknown birth action: " + this.birthActions[i]);
+      }
       this.birthActionGlobalIDs[i] = id;
     }
   }
@@ -90,9 +90,9 @@ public class CohortAggregation implements Operator {
   @Override
   public void process(ChunkRS chunk) {
     this.sigma.process(chunk);
-      if (!this.sigma.isBUserActiveChunk()) {
-          return;
-      }
+    if (!this.sigma.isBUserActiveChunk()) {
+      return;
+    }
 
     FieldRS appField = loadField(chunk, this.schema.getAppKeyField());
     FieldRS userField = loadField(chunk, this.schema.getUserKeyField());
@@ -103,9 +103,9 @@ public class CohortAggregation implements Operator {
     this.bBirthActionChunkIDs = new int[this.birthActionGlobalIDs.length];
     for (int i = 0; i < this.birthActionGlobalIDs.length; i++) {
       int id = actionField.getKeyVector().find(this.birthActionGlobalIDs[i]);
-        if (id < 0) {
-            return;
-        }
+      if (id < 0) {
+        return;
+      }
       this.bBirthActionChunkIDs[i] = id;
     }
 
@@ -133,20 +133,20 @@ public class CohortAggregation implements Operator {
     while (appInput.hasNext()) {
       appInput.nextBlock(appBlock);
       if (appFilter.accept(appBlock.value)) {
-          if (!(userField.getValueVector() instanceof RLEInputVector)) {
-              continue;
-          }
+        if (!(userField.getValueVector() instanceof RLEInputVector)) {
+          continue;
+        }
         RLEInputVector userInput = (RLEInputVector) userField.getValueVector();
         userInput.skipTo(0);
         RLEInputVector.Block userBlock = new RLEInputVector.Block();
         while (userInput.hasNext()) {
           userInput.nextBlock(userBlock);
-            if (userBlock.off < appBlock.off) {
-                continue;
-            }
-            if (userBlock.off > appBlock.off + appBlock.len) {
-                break;
-            }
+          if (userBlock.off < appBlock.off) {
+            continue;
+          }
+          if (userBlock.off > appBlock.off + appBlock.len) {
+            break;
+          }
 
           int begin = userBlock.off;
           int end = userBlock.off + userBlock.len;
@@ -168,9 +168,9 @@ public class CohortAggregation implements Operator {
             if (ageOff < end) {
               bv.set(birthOff + 1, end);
               this.sigma.selectAgeActivities(birthOff + 1, end, bv);
-                if (!bv.isEmpty()) {
-                    aggregator.processUser(bv, birthTime, birthOff + 1, end, chunkResults[cohort]);
-                }
+              if (!bv.isEmpty()) {
+                aggregator.processUser(bv, birthTime, birthOff + 1, end, chunkResults[cohort]);
+              }
               bv.clear(birthOff + 1, end);
             }
           }
@@ -179,21 +179,21 @@ public class CohortAggregation implements Operator {
     }
 
     InputVector keyVector = null;
-      if (cohortField.isSetField()) {
-          keyVector = cohortField.getKeyVector();
-      }
+    if (cohortField.isSetField()) {
+      keyVector = cohortField.getKeyVector();
+    }
     for (int i = 0; i < cardinality; i++) {
       if (chunkResults[i][0] > 0) {
         int cohort = keyVector == null ? i + min : keyVector.get(i + min);
         for (int j = 0; j < cohortSize; j++) {
           CohortKey key = new CohortKey(cohort, j);
           long value = 0;
-            if (this.cubletResults.containsKey(key)) {
-                value = this.cubletResults.get(key);
-            }
-            if (value + chunkResults[i][j] > 0) {
-                this.cubletResults.put(key, value + chunkResults[i][j]);
-            }
+          if (this.cubletResults.containsKey(key)) {
+            value = this.cubletResults.get(key);
+          }
+          if (value + chunkResults[i][j] > 0) {
+            this.cubletResults.put(key, value + chunkResults[i][j]);
+          }
         }
       }
     }
@@ -204,20 +204,20 @@ public class CohortAggregation implements Operator {
   }
 
   private FieldRS loadField(ChunkRS chunk, String fieldName) {
-      if ("Retention".equals(fieldName)) {
-          return null;
-      }
+    if ("Retention".equals(fieldName)) {
+      return null;
+    }
     int id = this.schema.getFieldID(fieldName);
     return loadField(chunk, id);
   }
 
   private Aggregator newAggregator() {
     String metric = this.query.getMetric();
-      if (metric.equals("Retention")) {
-          return new UserCountAggregator();
-      } else {
-          return new SumAggregator();
-      }
+    if (metric.equals("Retention")) {
+      return new UserCountAggregator();
+    } else {
+      return new SumAggregator();
+    }
   }
 
   private int seekToBirthTuple(int begin, int end, InputVector actionInput) {

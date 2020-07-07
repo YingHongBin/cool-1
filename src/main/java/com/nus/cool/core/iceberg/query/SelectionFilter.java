@@ -13,15 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.nus.cool.core.io.storevector;
+package com.nus.cool.core.iceberg.query;
 
-import com.nus.cool.core.io.Input;
+import com.nus.cool.core.cohort.filter.FieldFilter;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.Data;
 
 /**
- * @author zhongle
+ * @author hongbin
  * @version 0.1
  * @since 0.1
  */
-public interface ZIntStore extends Input {
+@Data
+public class SelectionFilter {
+
+  private SelectionQuery.SelectionType type;
+
+  private FieldFilter filter;
+
+  private String dimension;
+
+  private List<SelectionFilter> fields = new ArrayList<>();
 
 }

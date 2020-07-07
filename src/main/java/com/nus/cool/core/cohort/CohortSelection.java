@@ -147,9 +147,9 @@ public class CohortSelection implements Operator {
       InputVector fieldInput = field.getValueVector();
       fieldInput.skipTo(birthOff);
       bSelected = entry.getValue().accept(fieldInput.next());
-        if (!bSelected) {
-            break;
-        }
+      if (!bSelected) {
+        break;
+      }
     }
     return bSelected;
   }
@@ -162,17 +162,17 @@ public class CohortSelection implements Operator {
       FieldFilter ageFilter = entry.getValue();
       if ((bs.cardinality() << 1) >= (ageEnd - ageOff)) {
         for (int i = ageOff; i < ageEnd; i++) {
-            if (!ageFilter.accept(fieldInput.next())) {
-                bs.clear(i);
-            }
+          if (!ageFilter.accept(fieldInput.next())) {
+            bs.clear(i);
+          }
         }
       } else {
         int off = bs.nextSetBit(ageOff);
         while (off < ageEnd && off >= 0) {
           fieldInput.skipTo(off);
-            if (!ageFilter.accept(fieldInput.next())) {
-                bs.clear(off);
-            }
+          if (!ageFilter.accept(fieldInput.next())) {
+            bs.clear(off);
+          }
           off = bs.nextSetBit(off + 1);
         }
       }

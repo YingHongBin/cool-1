@@ -25,7 +25,6 @@ import java.util.List;
 import lombok.Getter;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1

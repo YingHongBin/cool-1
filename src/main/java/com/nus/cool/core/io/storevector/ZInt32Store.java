@@ -21,7 +21,6 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1

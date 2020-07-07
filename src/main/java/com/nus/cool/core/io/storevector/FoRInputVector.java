@@ -19,7 +19,6 @@ import com.nus.cool.core.schema.Codec;
 import java.nio.ByteBuffer;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
@@ -39,9 +38,9 @@ public class FoRInputVector implements InputVector {
 
   @Override
   public int find(int key) {
-      if (key < this.min || key > this.max) {
-          return -1;
-      }
+    if (key < this.min || key > this.max) {
+      return -1;
+    }
     return this.vecIn.find(key - this.min);
   }
 

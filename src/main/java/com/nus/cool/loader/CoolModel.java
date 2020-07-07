@@ -31,7 +31,6 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
- *
  * @author hongbin, zhongle
  * @version 0.1
  * @since 0.1
@@ -49,9 +48,9 @@ public class CoolModel implements Closeable {
   public synchronized void reload(String cube) throws IOException {
     this.metaStore.remove(cube);
     File cubeRoot = new File(this.localRepo, cube);
-      if (!cubeRoot.exists()) {
-          throw new FileNotFoundException(cube + " was not found");
-      }
+    if (!cubeRoot.exists()) {
+      throw new FileNotFoundException(cube + " was not found");
+    }
     TableSchema schema = TableSchema.read(new FileInputStream(new File(cubeRoot, "table.yaml")));
     CubeRS cubeRS = new CubeRS(schema);
     File[] versions = cubeRoot.listFiles(new FileFilter() {
@@ -61,9 +60,9 @@ public class CoolModel implements Closeable {
       }
     });
     checkNotNull(versions);
-      if (versions.length == 0) {
-          return;
-      }
+    if (versions.length == 0) {
+      return;
+    }
     Arrays.sort(versions);
     File currentVersion = versions[versions.length - 1];
     File[] cubletFiles = currentVersion.listFiles(new FilenameFilter() {
@@ -73,9 +72,9 @@ public class CoolModel implements Closeable {
       }
     });
     checkNotNull(cubletFiles);
-      for (File cubletFile : cubletFiles) {
-          cubeRS.addCublet(cubletFile);
-      }
+    for (File cubletFile : cubletFiles) {
+      cubeRS.addCublet(cubletFile);
+    }
     this.metaStore.put(cube, cubeRS);
   }
 

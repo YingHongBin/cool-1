@@ -19,14 +19,16 @@ import com.nus.cool.core.io.Input;
 import com.nus.cool.core.io.storevector.InputVector;
 import com.nus.cool.core.schema.FieldType;
 import java.nio.ByteBuffer;
+import java.util.BitSet;
 
 /**
- *
  * @author zhongle
  * @version 0.1
  * @since 0.1
  */
 public interface FieldRS extends Input {
+
+  FieldType getFieldType();
 
   InputVector getKeyVector();
 
@@ -37,6 +39,10 @@ public interface FieldRS extends Input {
   int maxKey();
 
   boolean isSetField();
+
+  boolean isPreCal();
+
+  BitSet[] getBitSets();
 
   void readFromWithFieldType(ByteBuffer buf, FieldType fieldType);
 }
